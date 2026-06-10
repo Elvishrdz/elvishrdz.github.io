@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elvis Hernández · Android Engineer</title>
+  <meta name="description" content="Elvis Hernández · Android Engineer with 7+ years building native Kotlin apps in production. Jetpack Compose, Clean Architecture, apps published on Google Play." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Cursor glow -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ===== Navbar ===== -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo">EH<span class="accent">.</span></a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#home" class="nav__link is-active" data-i18n="nav.home">Home</a>
+        <a href="#about" class="nav__link" data-i18n="nav.about">About</a>
+        <a href="#experience" class="nav__link" data-i18n="nav.experience">Experience</a>
+        <a href="#projects" class="nav__link" data-i18n="nav.projects">Projects</a>
+        <a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <div class="lang-switch" id="langSwitch" role="group" aria-label="Language" data-active="en">
+          <span class="lang-switch__thumb" aria-hidden="true"></span>
+          <button class="lang-switch__btn" data-lang="es" type="button">ES</button>
+          <button class="lang-switch__btn is-active" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="home">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="orb orb--1" data-parallax="0.25"></div>
+      <div class="orb orb--2" data-parallax="0.15"></div>
+      <div class="orb orb--3" data-parallax="0.35"></div>
+      <div class="hero__grid"></div>
+    </div>
+
+    <div class="container hero__content">
+      <p class="hero__eyebrow reveal" data-i18n="hero.eyebrow">👋 Hi, I'm</p>
+      <h1 class="hero__title reveal" data-delay="100">
+        Elvis Hernández<span class="accent">.</span>
+      </h1>
+      <h2 class="hero__subtitle reveal" data-delay="200">
+        <span id="typewriter"></span><span class="caret" aria-hidden="true"></span>
+      </h2>
+      <p class="hero__desc reveal" data-delay="300" data-i18n="hero.desc">
+        Software Engineer specialised in Android development with 7+ years of experience building native apps, now primarily working with Kotlin Multiplatform and AI agents.
+      </p>
+      <div class="hero__actions reveal" data-delay="400">
+        <a href="#projects" class="btn btn--primary" data-i18n="hero.cta1">View my projects</a>
+        <a href="#contact" class="btn btn--ghost" data-i18n="hero.cta2">Get in touch</a>
+      </div>
+      <div class="hero__socials reveal" data-delay="500">
+        <a href="https://github.com/elvishrdz" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/elvishrdz" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+        <a href="mailto:elvishrdz@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5.01-8-5.01V6.41l8 5.01 8-5.01v1.83z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <a href="#about" class="hero__scroll" aria-label="Scroll">
+      <span class="hero__scroll-dot"></span>
+    </a>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section__eyebrow reveal" data-i18n="about.eyebrow">01 About me</p>
+      <h2 class="section__title reveal" data-i18n="about.title">Build and maintain apps <span class="accent">people use every day</span></h2>
+
+      <div class="about">
+        <div class="about__text reveal" data-delay="100">
+          <p data-i18n="about.p1">
+            Throughout my career I've worked with multiple programming languages and tools to create applications for end users, but mobile gave me everything I wanted: logic, UI, and craft in one place. Kotlin became the foundation that let me take that further by sharing a single language across platforms.
+          </p>
+          <p data-i18n="about.p2">
+            I've specialised in Android engineering since 2017, building native apps and gaining experience with C# and Unity for multiplatform software. Today I work primarily with Kotlin, in backend systems with Spring Boot and across platforms with KMP and Jetpack Compose Multiplatform to ship Android, iOS, and desktop apps from a single codebase.
+          </p>
+          <p data-i18n="about.p3">
+            I've taken my own products from concept to launch, owning every step from planning and design to deployment. I've also contributed to larger codebases with apps reaching thousands of users across Germany and Europe.
+          </p>
+          <p data-i18n="about.p4">
+            I'm collaborative, professional and always open to new technologies and challenges.
+          </p>
+          <div class="about__stats">
+            <div class="stat">
+              <span class="stat__num" data-count="7">0</span><span class="stat__plus">+</span>
+              <span class="stat__label" data-i18n="about.stat1">Years of mobile engineering</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num" data-count="99.8">0</span><span class="stat__plus">%</span>
+              <span class="stat__label" data-i18n="about.stat2">Crash-free sessions</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num" data-count="36">0</span><span class="stat__plus">K+</span>
+              <span class="stat__label" data-i18n="about.stat3">Users reached across Europe</span>
+            </div>
+          </div>
+        </div>
+        <div class="about__card reveal" data-delay="200">
+          <div class="tilt-card" id="tiltCard">
+            <div class="tilt-card__inner">
+              <div class="tilt-card__avatar">EH</div>
+              <h3>Elvis Hernández</h3>
+              <p data-i18n="about.role">Software Engineer</p>
+              <div class="tilt-card__meta">
+                <span class="tilt-card__location">📍 <span data-i18n="about.location">Bavaria, Germany</span></span>
+                <span class="tilt-card__langs">🌐 EN · ES</span>
+              </div>
+              <div class="tilt-card__badges">
+                <span>KMP</span>
+                <span>CMP</span>
+                <span>Unity</span>
+                <span data-i18n="about.stackMobile">Mobile</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Experience ===== -->
+  <section class="section section--alt" id="experience">
+    <div class="container">
+      <p class="section__eyebrow reveal" data-i18n="exp.eyebrow">02 Experience</p>
+      <!-- Guided tour rendered dynamically from js/experience.js -->
+      <div id="experienceRoot" class="reveal"></div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section class="section" id="projects">
+    <div class="container">
+      <p class="section__eyebrow reveal" data-i18n="projects.eyebrow">03 Projects</p>
+      <h2 class="section__title reveal" data-i18n="projects.title">Apps I've <span class="accent">shipped to production</span></h2>
+      <p class="projects__hint reveal" data-delay="80" data-i18n="projects.hint">Click any project to open it full screen.</p>
+
+      <!-- Grid rendered dynamically from js/projects.js -->
+      <div class="projects" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Contact + Stack ===== -->
+  <section class="section section--alt" id="contact">
+    <div class="container">
+      <div class="merge">
+
+        <!-- Left: Contact -->
+        <div class="merge__contact reveal">
+          <p class="section__eyebrow" data-i18n="contact.eyebrow">04 Contact</p>
+          <h2 class="merge__title" data-i18n="contact.title">Open to new <span class="accent">opportunities</span></h2>
+          <p class="merge__desc" data-i18n="contact.desc"></p>
+
+          <div class="contact-list">
+            <a class="contact-row" href="mailto:elvishrdz@gmail.com">
+              <span class="contact-row__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              </span>
+              <span class="contact-row__body">
+                <span class="contact-row__label">Email</span>
+                <span class="contact-row__value">elvishrdz@gmail.com</span>
+              </span>
+              <span class="contact-row__arrow" aria-hidden="true">→</span>
+            </a>
+
+            <a class="contact-row" href="https://github.com/elvishrdz" target="_blank" rel="noopener">
+              <span class="contact-row__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-1.8c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 0 1.1-.3.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+              </span>
+              <span class="contact-row__body">
+                <span class="contact-row__label">GitHub</span>
+                <span class="contact-row__value">github.com/elvishrdz</span>
+              </span>
+              <span class="contact-row__arrow" aria-hidden="true">→</span>
+            </a>
+
+            <a class="contact-row" href="https://linkedin.com/in/elvishrdz" target="_blank" rel="noopener">
+              <span class="contact-row__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33 0-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+              </span>
+              <span class="contact-row__body">
+                <span class="contact-row__label">LinkedIn</span>
+                <span class="contact-row__value">linkedin.com/in/elvishrdz</span>
+              </span>
+              <span class="contact-row__arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <p class="merge__note" data-i18n="contact.note">
+            Based in Germany (CET) · Remote · Hybrid · English · Spanish
+          </p>
+        </div>
+
+        <!-- Right: animated stack -->
+        <div class="merge__stack reveal" data-delay="120">
+          <div class="techpanel">
+            <div class="techpanel__bar" aria-hidden="true">
+              <span class="techpanel__dots"><i></i><i></i><i></i></span>
+              <span class="techpanel__caption" data-i18n="stack.caption">stack.kt</span>
+              <span class="techpanel__live"><i></i><span data-i18n="stack.live">live</span></span>
+            </div>
+            <div class="techcloud" id="techCloud" aria-hidden="true"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Horizontal marquee -->
+      <div class="marquee reveal" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Kotlin</span><span>•</span><span>Jetpack Compose</span><span>•</span>
+          <span>Coroutines</span><span>•</span><span>Flow</span><span>•</span>
+          <span>Room</span><span>•</span><span>Hilt</span><span>•</span>
+          <span>Retrofit</span><span>•</span><span>KMP</span><span>•</span>
+          <span>Android Auto</span><span>•</span><span>WorkManager</span><span>•</span>
+          <span>Kotlin</span><span>•</span><span>Jetpack Compose</span><span>•</span>
+          <span>Coroutines</span><span>•</span><span>Flow</span><span>•</span>
+          <span>Room</span><span>•</span><span>Hilt</span><span>•</span>
+          <span>Retrofit</span><span>•</span><span>KMP</span><span>•</span>
+          <span>Android Auto</span><span>•</span><span>WorkManager</span><span>•</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p data-i18n="footer.text">© <span id="year"></span> Elvis Hernández · Software Engineer · Kotlin · Compose · C# · Unity</p>
+      <a href="#home" class="footer__top" data-i18n="footer.top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- ===== Fullscreen project viewer ===== -->
+  <div class="viewer" id="projectViewer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project detail">
+    <div class="viewer__backdrop" id="viewerBackdrop"></div>
+    <div class="viewer__panel" id="viewerPanel" aria-hidden="true">
+      <video class="viewer__bgvideo" id="viewerBgVideo" muted loop playsinline preload="auto"></video>
+      <div class="viewer__scrim"></div>
+    </div>
+    <div class="viewer__content" id="viewerContent">
+      <header class="viewer__topbar">
+        <button class="viewer__back" id="viewerBack" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <span data-i18n="viewer.back">All projects</span>
+        </button>
+        <span class="viewer__logo">EH<span class="accent">.</span></span>
+      </header>
+      <div class="viewer__dockscrim" id="viewerDockScrim" aria-hidden="true"></div>
+      <nav class="wheel" id="projectWheel" aria-label="Project navigation"></nav>
+      <button class="viewer__docktoggle" id="viewerDockToggle" type="button" aria-label="Projects" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      </button>
+      <div class="viewer__scroll" id="viewerScroll">
+        <div class="viewer__stage" id="viewerStage"></div>
+      </div>
+      <div class="viewer__arrows">
+        <button class="viewer__arrow" id="viewerPrev" aria-label="Previous project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="viewer__arrow" id="viewerNext" aria-label="Next project">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/experience.js"></script>
+  <script src="js/projects.data.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/techcloud.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
