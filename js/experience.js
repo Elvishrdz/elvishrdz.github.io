@@ -137,7 +137,8 @@ const JOBS = [
   const tL = (v) => (v && typeof v === "object" && !Array.isArray(v) ? v[currentLang] ?? v.es : v);
   const ui = () => EXP_UI[currentLang] || EXP_UI.es;
 
-  let active = 0;
+  let active = 0; // index of the open card, or -1 when all are collapsed
+  let lastActive = 0; // last card that was open — where Play resumes from after a collapse
   let playing = !reduce;
   let showAll = false;
   let rafId = null;
@@ -291,6 +292,7 @@ const JOBS = [
       if (p < 1) rafId = requestAnimationFrame(tick);
       else {
         active = (active + 1) % JOBS.length;
+        lastActive = active;
         showAll = false;
         syncOpenStates();
         maybeStartProgress();
@@ -315,7 +317,26 @@ const JOBS = [
 
   function select(i) {
     const prev = active;
+
+    if (i === active) {
+      // Clicking the already-open card.
+      if (playing) {
+        // open + autoplay → just stop the autoplay, keep it open
+        pause();
+      } else {
+        // open + no autoplay → collapse it (no card open)
+        active = -1;
+        showAll = false;
+        stopProgress();
+        syncOpenStates();
+        syncControl();
+      }
+      return;
+    }
+
+    // Clicking a closed card → expand it and stop autoplay.
     active = i;
+    lastActive = i;
     showAll = false;
     playing = false;
     stopProgress();
@@ -332,7 +353,7 @@ const JOBS = [
     const item = root.querySelector(`.exp-item[data-i="${i}"]`);
     if (!item) return;
     const go = () => item.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    if (reduce || prev >= i) { go(); return; } // no card above collapses → safe now
+    if (reduce || prev === -1 || prev >= i) { go(); return; } // no card above collapses → safe now
     const detail = item.querySelector(".exp-detail");
     let done = false;
     const finish = () => {
@@ -348,6 +369,8 @@ const JOBS = [
   }
 
   function play() {
+    // Resume from the last auto-played card; if none is known, start from the top.
+    if (active === -1) active = lastActive >= 0 ? lastActive : 0;
     playing = true;
     syncControl();
     syncOpenStates();
