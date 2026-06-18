@@ -56,6 +56,7 @@
 const FEATURES = {
   showJobs: true, // false → removes elvah + TeMoGlo (and every variant) everywhere at once
   showWipVersions: true, // false → hides WIP versions (and WIP-only projects)
+  showWipBadge: true, // false → hides the "Work in progress" label in the project viewer top bar
 };
 
 const PROJECTS = [

@@ -151,6 +151,10 @@ const dockScrim = document.getElementById("viewerDockScrim");
 const backdrop = document.getElementById("viewerBackdrop");
 const bgVideo = document.getElementById("viewerBgVideo");
 
+// WIP label in the viewer top bar — visibility controlled by FEATURES.showWipBadge.
+const wipBadge = document.getElementById("viewerWip");
+if (wipBadge) wipBadge.hidden = !FEATURES.showWipBadge;
+
 let openIndex = 0;
 let isOpen = false;
 let opening = false; // true only during the open FLIP, until the content reveal fires

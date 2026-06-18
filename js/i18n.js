@@ -17,6 +17,7 @@ const I18N = {
     "nav.contact": "Contacto",
 
     "viewer.back": "Todos los proyectos",
+    "viewer.wip": "🚧 En construcción",
 
     "hero.eyebrow": "👋 Hola, soy",
     "hero.desc":
@@ -127,6 +128,7 @@ const I18N = {
     "nav.contact": "Contact",
 
     "viewer.back": "All projects",
+    "viewer.wip": "🚧 Work in progress",
 
     "hero.eyebrow": "👋 Hi, I'm",
     "hero.desc":

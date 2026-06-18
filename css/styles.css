@@ -1973,6 +1973,29 @@ body {
 .viewer__back:hover { opacity: 1; transform: translateX(-3px); }
 .viewer__back svg { width: 20px; height: 20px; }
 
+.viewer__wip {
+  pointer-events: auto;
+  position: absolute;
+  left: 50%;
+  top: clamp(18px, 3vw, 26px);
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  color: #ffb347;
+  background: rgba(255, 140, 0, 0.12);
+  border: 1px solid rgba(255, 140, 0, 0.4);
+  padding: 6px 14px;
+  border-radius: 99px;
+}
+
+.viewer__wip[hidden] { display: none; }
+
 .viewer__logo {
   pointer-events: auto;
   font-family: var(--font-display);
