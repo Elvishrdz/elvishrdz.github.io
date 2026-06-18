@@ -27,40 +27,40 @@ const JOBS = [
   {
     role: { es: "Android Developer", en: "Android Developer" },
     company: "elvah GmbH",
+    city: { es: "Berlín", en: "Berlin"},
+    country: { es: "Alemania", en: "Germany"},
     period: "2022 — 2026",
     meta: {
       es: "Berlín, Alemania · Remoto · Apps de carga de VE (B2C)",
       en: "Berlin, Germany · Remote · Consumer EV-charging (B2C)",
     },
     summary: {
-      es: "Fui dueño de features de carga de vehículos eléctricos de extremo a extremo en un codebase Kotlin grande y modular — desde el descubrimiento de puntos de carga hasta sesiones de carga en vivo.",
-      en: "Owned EV-charging features end-to-end in a large, modular Kotlin codebase — from charge-point discovery to live charging sessions.",
+      es: "Estuve a cargo de funciones de carga de vehículos eléctricos de extremo a extremo en una base de codigo modular escrita en Kotlin. Desde encontrar de puntos de carga hasta sesiones de carga en tiempo real.",
+      en: "Owned EV-charging features end-to-end in a large, modular Kotlin codebase. From charge-point discovery to live charging sessions.",
     },
     metrics: [
-      { value: "36.1K", label: { es: "usuarios activos", en: "active users" } },
+      { value: "36K+", label: { es: "usuarios activos", en: "active users" } },
       { value: "99.8%", label: { es: "sin fallos", en: "crash-free" } },
       { value: { es: "4 años", en: "4 yrs" }, label: { es: "antigüedad", en: "tenure" } },
     ],
     bullets: {
       es: [
-        "Crecí el producto de ~21.7k a 36.1k usuarios activos en siete meses.",
-        "Lideré la migración de XML Views a Jetpack Compose.",
-        "Construí un SDK nativo reutilizable (ChargeSDK) usado por varios equipos.",
-        "Lancé una app de Android Auto desde cero sobre la Car App Library.",
-        "Diseñé pipelines CI/CD en Bitrise y GitHub Actions.",
-        "Llevé la estabilidad a ~99.8% sin fallos con monitoreo proactivo en Crashlytics.",
-        "Configuré Detekt, Renovate y controles de calidad en el codebase modular.",
-        "Integré herramientas de IA (Claude Code, Gemini) con revisión humana rigurosa.",
+        "Trabaje migrando vistas XML a Jetpack Compose.",
+        "Construccion y mantenimiento de un SDK nativo.",
+        "Desarrolle una app Android Auto desde cero para el Android auto head unit",
+        "Configuration y diseño de workflows CI/CD en Bitrise y GitHub Actions.",
+        "Mantuve la estabilidad aprox. 99.8% sin fallos con monitoreo proactivo en Crashlytics.",
+        "Configuration de controles de calidad del codigo en la base de codigo modular.",
+        "Empeze a trabajar e integrar herramientas de IA con mi revisión rigurosa.",
       ],
       en: [
-        "Grew the product from ~21.7k to 36.1k active users in seven months.",
-        "Led the migration from XML Views to Jetpack Compose.",
-        "Built a reusable native SDK (ChargeSDK) consumed by multiple teams.",
-        "Shipped an Android Auto app from scratch on the Car App Library.",
-        "Designed CI/CD pipelines on Bitrise and GitHub Actions.",
-        "Drove crash-free stability to ~99.8% with proactive Crashlytics monitoring.",
-        "Set up Detekt, Renovate and code-quality gates across the modular codebase.",
-        "Integrated AI tooling (Claude Code, Gemini) with rigorous human review.",
+        "Worked on migrating XML views to Jetpack Compose.",
+        "Built and maintained a native SDK.",
+        "Developed an Android Auto app from scratch for the Android Auto head unit.",
+        "Set up and designed CI/CD workflows in Bitrise and GitHub Actions.",
+        "Kept stability at aprox. 99.8% crash-free with proactive monitoring in Crashlytics.",
+        "Set up code-quality checks across the modular codebase.",
+        "Started adopting and integrating AI tools backed by my rigorous review.",
       ],
     },
     tags: ["Kotlin", "Jetpack Compose", "Android Auto", "SDK", "CI/CD"],
@@ -68,49 +68,58 @@ const JOBS = [
   {
     role: { es: "Android Developer", en: "Android Developer" },
     company: "Tecnologías Móviles Globales",
+    city: { es: "Managua", en: "Managua"},
+    country: { es: "Nicaragua", en: "Nicaragua"},
     period: "2020 — 2022",
     meta: {
       es: "Managua, Nicaragua · Presencial · De intern a full-time",
       en: "Managua, Nicaragua · On-site · Intern → full-time",
     },
     summary: {
-      es: "Pasé de intern a ingeniero full-time, construyendo y manteniendo apps Android en producción dentro de equipos ágiles colaborativos.",
-      en: "Grew from intern to full-time engineer, building and maintaining production Android apps within collaborative agile teams.",
+      es: "Trabaje con apps Android en producción creando nuevas variantes y funciones. Aqui inicie mi carrera profesional, pasé de interno a trabajar tiempo completo ademas que introduje Unity para nuevos projectos",
+      en: "Worked on production Android apps, building new variants and features. This is where I started my professional career, going from intern to full-time. Here I introduced Unity for new projects.",
     },
     metrics: [
-      { value: { es: "Intern→FT", en: "Intern→FT" }, label: { es: "promoción", en: "promotion" } },
-      { value: { es: "2 años", en: "2 yrs" }, label: { es: "antigüedad", en: "tenure" } },
+        {value: {es: "2 años", en: "2 yrs"}, label: {es: "antigüedad", en: "tenure"}},
     ],
     bullets: {
       es: [
         "Desarrollé y mantuve features para apps Android en producción.",
-        "Ayudé a migrar código legacy de Java a Kotlin.",
-        "Construí prototipos rápidos y un juego para Android basado en Unity3D.",
+        "Trabaje con XML, Java, RxJava y otras librerias que ahora son poco usadas.",
+        "Construí prototipos y variantes rapidas ademas de un juego para Android con Unity3D.",
       ],
       en: [
         "Developed and maintained features for production Android apps.",
-        "Helped migrate legacy Java codebases to Kotlin.",
-        "Built rapid prototypes and a Unity3D-based Android game.",
+        "Worked with XML, Java, RxJava and other now legacy-used libraries.",
+        "Built rapid prototypes and variants, plus an Android game with Unity3D.",
       ],
     },
     tags: ["Java", "Kotlin", "Unity3D"],
   },
   {
     role: {
-      es: "Ing. en Sistemas y Tecnologías de la Información",
-      en: "B.Eng. Information Systems & Technologies",
+      es: "Ingeniero en Sistemas y Tecnologías de la Información",
+      en: "Information Systems & Technologies Engineer",
     },
     company: "Universidad Centroamericana (UCA)",
+    city: { es: "Managua", en: "Managua"},
+    country: { es: "Nicaragua", en: "Nicaragua"},
     period: "2013 — 2017",
     meta: { es: "Managua, Nicaragua", en: "Managua, Nicaragua" },
     summary: {
-      es: "Título de ingeniería en Sistemas y Tecnologías de la Información — fundamentos de ingeniería de software, algoritmos y diseño de sistemas.",
-      en: "Engineering degree in Information Systems & Technologies — foundations in software engineering, algorithms and systems design.",
+      es: "Título universitario de ingeniería en Sistemas y Tecnologías de la Información con mencion en sistemas de informacion tomado en Managua capital de Nicaragua.",
+      en: "Engineering degree in Information Systems & Technologies, with a major in information systems, completed in Managua, the capital of Nicaragua.",
     },
     metrics: [],
     bullets: {
-      es: ["Me gradué con enfoque en ingeniería de software y diseño de sistemas."],
-      en: ["Graduated with a focus on software engineering and systems design."],
+      es: [
+        "Estudie de fundamentos de ingeniería de software, algoritmos y diseño de sistemas de software",
+        "Decidi seguir el area de desarrollo mobil al presentar una app android como proyecto final de la carrera.",
+      ],
+      en: [
+        "Studied the foundations of software engineering, algorithms and software systems design.",
+        "Decided to pursue mobile development after presenting an Android app as my final degree project.",
+      ],
     },
     tags: { es: ["Ciencias de la computación", "Ingeniería de software"], en: ["Computer Science", "Software Engineering"] },
     edu: true,
@@ -190,6 +199,9 @@ const JOBS = [
     const rest = bullets.slice(MAX_POINTS);
     const tags = tL(j.tags) || [];
 
+    // Ubicación opcional: "Ciudad, País" (city/country son { es, en }).
+    const loc = [tL(j.city), tL(j.country)].filter(Boolean).join(", ");
+
     const metricsHTML = j.metrics.length
       ? `<div class="exp-metrics">${j.metrics
           .map(
@@ -211,7 +223,7 @@ const JOBS = [
           <div class="exp-head">
             <div class="exp-head-main">
               <h3 class="exp-role">${tL(j.role)}</h3>
-              <span class="exp-company">${j.company}</span>
+              <span class="exp-company">${j.company}${loc ? ` | ${loc}` : ""}</span>
             </div>
             <div class="exp-head-right">
               <span class="exp-period">${j.period}</span>
