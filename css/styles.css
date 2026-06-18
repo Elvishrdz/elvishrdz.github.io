@@ -1996,6 +1996,16 @@ body {
 
 .viewer__wip[hidden] { display: none; }
 
+.viewer__topright {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vw, 18px);
+}
+
+.viewer__topright .lang-switch {
+  pointer-events: auto;
+}
+
 .viewer__logo {
   pointer-events: auto;
   font-family: var(--font-display);
@@ -2003,6 +2013,22 @@ body {
   font-size: 1.25rem;
   letter-spacing: -0.5px;
   color: #fff;
+}
+
+/* Narrow widths: keep the top bar from crowding. The centered WIP label stays
+   visible, so we drop the back-button text to its icon, hide the decorative
+   logo, and shrink the WIP pill + language switch to free horizontal room. */
+@media (max-width: 600px) {
+  .viewer__topbar { padding: 16px; }
+  .viewer__back span { display: none; }
+  .viewer__logo { display: none; }
+  .viewer__wip {
+    top: 16px;
+    font-size: 0.68rem;
+    padding: 5px 11px;
+    gap: 5px;
+  }
+  .viewer__topright .lang-switch__btn { padding: 5px 11px; font-size: 0.72rem; }
 }
 
 /* Arrows */

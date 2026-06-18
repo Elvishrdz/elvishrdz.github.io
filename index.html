@@ -271,7 +271,14 @@
           <span data-i18n="viewer.back">All projects</span>
         </button>
         <span class="viewer__wip" id="viewerWip" data-i18n="viewer.wip" hidden>🚧 Work in progress</span>
-        <span class="viewer__logo">EH<span class="accent">.</span></span>
+        <div class="viewer__topright">
+          <div class="lang-switch" id="viewerLangSwitch" role="group" aria-label="Language" data-active="en">
+            <span class="lang-switch__thumb" aria-hidden="true"></span>
+            <button class="lang-switch__btn" data-lang="es" type="button">ES</button>
+            <button class="lang-switch__btn is-active" data-lang="en" type="button">EN</button>
+          </div>
+          <span class="viewer__logo">EH<span class="accent">.</span></span>
+        </div>
       </header>
       <div class="viewer__dockscrim" id="viewerDockScrim" aria-hidden="true"></div>
       <nav class="wheel" id="projectWheel" aria-label="Project navigation"></nav>

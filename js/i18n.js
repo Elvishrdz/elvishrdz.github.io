@@ -265,8 +265,9 @@ function applyLang(lang) {
     btn.classList.toggle("is-active", active);
     btn.setAttribute("aria-pressed", String(active));
   });
-  const switchEl = document.getElementById("langSwitch");
-  if (switchEl) switchEl.dataset.active = lang;
+  document.querySelectorAll(".lang-switch").forEach((el) => {
+    el.dataset.active = lang;
+  });
 
   localStorage.setItem(I18N_STORAGE_KEY, lang);
 
