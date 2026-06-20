@@ -938,13 +938,48 @@ function wireGallery() {
     if (card) openFocus(currentGallery, Number(card.dataset.i));
   });
   if (chips) {
+    const railPad = () => parseFloat(getComputedStyle(rail).paddingLeft) || 0;
+
+    // Which group sits at the rail's start? Returns null when the start has
+    // scrolled past the last shot (into the empty right padding) → none active.
+    const activeGroup = () => {
+      const ref = rail.getBoundingClientRect().left + railPad() + 4;
+      for (const card of rail.querySelectorAll(".gallery__card")) {
+        const r = card.getBoundingClientRect();
+        if (r.left - 1 <= ref && r.right > ref) return card.dataset.group;
+      }
+      return null;
+    };
+
+    // Keep the active chip in sync with whatever group is at the start.
+    const syncChips = () => {
+      const g = activeGroup();
+      chips.querySelectorAll(".gallery__chip").forEach((x) =>
+        x.classList.toggle("is-active", x.dataset.group === g)
+      );
+    };
+
+    // Clicking a chip scrolls that group's FIRST shot to the rail's start.
     chips.addEventListener("click", (e) => {
       const c = e.target.closest(".gallery__chip");
       if (!c) return;
-      chips.querySelectorAll(".gallery__chip").forEach((x) => x.classList.toggle("is-active", x === c));
       const target = [...rail.querySelectorAll(".gallery__card")].find((el) => el.dataset.group === c.dataset.group);
-      if (target) rail.scrollTo({ left: target.offsetLeft - rail.clientWidth / 2 + target.offsetWidth / 2, behavior: "smooth" });
+      if (!target) return;
+      const delta = target.getBoundingClientRect().left - rail.getBoundingClientRect().left - railPad();
+      rail.scrollTo({ left: rail.scrollLeft + delta, behavior: "smooth" });
+      syncChips();
     });
+
+    // Scroll-spy: update the active chip as the user scrolls the rail.
+    let ticking = false;
+    rail.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { syncChips(); ticking = false; });
+    }, { passive: true });
+
+    syncChips(); // initial state
+    rail._syncChips = syncChips; // exposed so a restored scroll position can refresh it
   }
 }
 
@@ -1031,7 +1066,20 @@ document.addEventListener("langchange", () => {
   renderGrid();
   buildDock();
   layoutDock();
-  if (isOpen) paintStage();
+  if (isOpen) {
+    // Only the texts change — keep the reader where they were (vertical scroll
+    // and the gallery's horizontal position / current screenshot).
+    const top = scroller.scrollTop;
+    const oldRail = stage.querySelector(".gallery__rail");
+    const railLeft = oldRail ? oldRail.scrollLeft : 0;
+    paintStage();
+    scroller.scrollTop = top;
+    const newRail = stage.querySelector(".gallery__rail");
+    if (newRail) {
+      newRail.scrollLeft = railLeft;
+      if (newRail._syncChips) newRail._syncChips(); // refresh the active chip
+    }
+  }
 });
 
 /* ----- init ----- */
