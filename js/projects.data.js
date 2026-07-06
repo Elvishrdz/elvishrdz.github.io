@@ -60,7 +60,98 @@ const FEATURES = {
 };
 
 const PROJECTS = [
-  /* ===================== FEATURED ===================== */
+
+  // ---------- Credit Manager (App KMP · Backend) ----------
+  {
+    id: "credit-manager",
+    glyph: "💳",
+    icon: "assets/projects/cm-manager/v1/cm-staff-app-icon.png",
+    name: "Credit Manager",
+    featured: true,
+    tagline: {
+      es: "Este es un sistema de creditos para Android, iOS, MacOS, Windows y Linux hecho con Kotlin SpringBoot y Kotlin Multiplataforma",
+      en: "This is a credit system for Android, iOS, MacOS, Windows and Linux made with Kotlin SpringBoot and Kotlin Multiplatform"
+    },
+    surfaces: [
+      {
+        label: { es: "App", en: "App" },
+        versions: [
+          {
+            label: "v1.0.0",
+            sub: { es: "2026", en: "2026" },
+            year: "2026",
+            era: "modern",
+            meta: { es: "KMP · Compose MP · Room · Koin · Ktor", en: "KMP · Compose MP · Room · Koin · Ktor" },
+            gradient: "#ffffff",
+            accent: "#b1b1b1",
+            desc: {
+              es: "App de gestión para un negocio de créditos. Con Kotlin Multiplatform adapta sus capacidades a cada plataforma: la versión de escritorio ofrece funciones administrativas más ricas, mientras las apps móviles se enfocan en operaciones de campo como cobrar cuotas.",
+              en: "A management app for a credit business. Using Kotlin Multiplatform it adapts to each platform: the desktop build offers richer administrative features, while the mobile apps focus on field operations like collecting installments.",
+            },
+            highlights: {
+              es: ["Lógica y UI compartidas con KMP + Compose MP", "Escritorio para administración, móvil para campo", "Estadísticas y proyecciones del negocio"],
+              en: ["Shared logic & UI with KMP + Compose MP", "Desktop for admin, mobile for the field", "Business statistics and projections"],
+            },
+            stack: ["Compose Multiplatform (CMP)", "Mapbox", "Supabase", "Xcode", "Android Studio", "IntelliJ", "Redis", "Room", "Koin", "Ktor", "MacOS", "Android", "iOS", "Claude Code", "Kotlin", "Kotlin Multiplatform (KMP)"],
+            media: {
+              kind: "gallery",
+              devices: [
+                { kind: "phone", src: "assets/projects/cm-manager/v1/01-cm-ios-app-staff-dashboard.png", caption: { es: "Menu de personal", en: "Staff dashboard" }, group: { es: "iOS", en: "iOS" } },
+                { kind: "phone", src: "assets/projects/cm-manager/v1/02-cm-ios-app-map-location-picker.png", caption: { es: "Mapa", en: "Map" }, group: { es: "iOS", en: "iOS" } },
+                { kind: "phone", src: "assets/projects/cm-manager/v1/03-cm-ios-app-credits.png", caption: { es: "Creditos", en: "Credits" }, group: { es: "iOS", en: "iOS" } },
+                { kind: "phone", src: "assets/projects/cm-manager/v1/04-cm-ios-app-daily-collection.png", caption: { es: "Cobro diario", en: "Daily Collection" }, group: { es: "iOS", en: "iOS" } },
+                { kind: "phone", src: "assets/projects/cm-manager/v1/05-cm-ios-app-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector System" }, group: { es: "iOS", en: "iOS" } },
+
+                // { kind: "phone", src: "assets/projects/cm-manager/v1/01-cm-ios-app-staff-dashboard.png", caption: { es: "Menu de personal", en: "Staff dashboard" }, group: { es: "Android", en: "Android" } },
+                // { kind: "phone", src: "assets/projects/cm-manager/v1/02-cm-ios-app-map-location-picker.png", caption: { es: "Mapa", en: "Map" }, group: { es: "Android", en: "Android" } },
+                // { kind: "phone", src: "assets/projects/cm-manager/v1/03-cm-ios-app-credits.png", caption: { es: "Creditos", en: "Credits" }, group: { es: "Android", en: "Android" } },
+                // { kind: "phone", src: "assets/projects/cm-manager/v1/04-cm-ios-app-daily-collection.png", caption: { es: "Cobro diario", en: "Daily Collection" }, group: { es: "Android", en: "Android" } },
+                // { kind: "phone", src: "assets/projects/cm-manager/v1/05-cm-ios-app-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector System" }, group: { es: "Android", en: "Android" } },
+
+                { kind: "laptop", src: "assets/projects/cm-manager/v1/01-cm-desktop-app-macos-installer.png", caption: { es: "Instaladores", en: "Installers" }, group: { es: "MacOS", en: "MacOS" } },
+                { kind: "laptop", src: "assets/projects/cm-manager/v1/02-cm-desktop-app-macos-apps-installed.png", caption: { es: "Apps instaladas", en: "Installed apps" }, group: { es: "MacOS", en: "MacOS" } },
+                { kind: "laptop", src: "assets/projects/cm-manager/v1/03-cm-desktop-app-macos-credit-requests.png", caption: { es: "Solicitud de creditos", en: "Credit requests" }, group: { es: "MacOS", en: "MacOS" } },
+                { kind: "laptop", src: "assets/projects/cm-manager/v1/04-cm-desktop-app-macos-customer-details.png", caption: { es: "Detalles del cliente", en: "Client details" }, group: { es: "MacOS", en: "MacOS" } },
+                { kind: "laptop", src: "assets/projects/cm-manager/v1/05-cm-desktop-app-macos-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector system" }, group: { es: "MacOS", en: "MacOS" } },
+                { kind: "laptop", src: "assets/projects/cm-manager/v1/06-cm-desktop-app-macos-collector-dashboard.png", caption: { es: "Menu de cobradores", en: "collector dashboard" }, group: { es: "MacOS", en: "MacOS" } },
+
+                // { kind: "laptop", src: "assets/projects/cm-manager/v1/01-cm-desktop-app-macos-installer.png", caption: { es: "Instaladores", en: "Installers" }, group: { es: "Windows", en: "Windows" } },
+                // { kind: "laptop", src: "assets/projects/cm-manager/v1/02-cm-desktop-app-macos-apps-installed.png", caption: { es: "Apps instaladas", en: "Installed apps" }, group: { es: "Windows", en: "Windows" } },
+                // { kind: "laptop", src: "assets/projects/cm-manager/v1/03-cm-desktop-app-macos-credit-requests.png", caption: { es: "Solicitud de creditos", en: "Credit requests" }, group: { es: "Windows", en: "Windows" } },
+                // { kind: "laptop", src: "assets/projects/cm-manager/v1/04-cm-desktop-app-macos-customer-details.png", caption: { es: "Detalles del cliente", en: "Client details" }, group: { es: "Windows", en: "Windows" } },
+                // { kind: "laptop", src: "assets/projects/cm-manager/v1/05-cm-desktop-app-macos-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector system" }, group: { es: "Windows", en: "Windows" } },
+                // { kind: "laptop", src: "assets/projects/cm-manager/v1/06-cm-desktop-app-macos-collector-dashboard.png", caption: { es: "Menu principal de cobradores", en: "collector dashboard" }, group: { es: "Windows", en: "Windows" } },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        label: { es: "Backend", en: "Backend" },
+        versions: [
+          {
+            label: "v1.0.0",
+            sub: { es: "2026", en: "2026" },
+            year: "2026",
+            era: "modern",
+            meta: { es: "Kotlin · Spring Boot · JPA · Redis · Supabase", en: "Kotlin · Spring Boot · JPA · Redis · Supabase" },
+            gradient: "#9c0000",
+            accent: "#d82a2a",
+            desc: {
+              es: "Construido manualmente desde cero y luego extendido con ayuda de Claude Code. Expone todos los endpoints de clientes y actúa como primera línea de defensa para la seguridad de los datos.",
+              en: "Built manually from scratch and later extended with help from Claude Code. It exposes all client endpoints and acts as the first line of defense for data security.",
+            },
+            highlights: {
+              es: ["Endpoints de clientes y créditos", "Persistencia con JPA y caché con Redis", "Datos en Supabase; seguridad de primera línea"],
+              en: ["Client and credit endpoints", "JPA persistence with Redis caching", "Supabase data; first-line security"],
+            },
+            stack: ["Kotlin", "Spring Boot 4", "Multi-module", "JPA", "Redis", "Supabase", "Claude Code", "AI Skills"],
+            media: { kind: "none" },
+          },
+        ],
+      },
+    ],
+  },
 
   // ---------- Drink Water (v1 XML → v2 KMP) ----------
   {
@@ -68,7 +159,7 @@ const PROJECTS = [
     glyph: "💧",
     icon: "assets/projects/drink-water/icon.jpg",
     name: "Drink Water",
-    featured: true,
+      featured: true,
     tagline: {
       es: "Recordatorios y tracking para mejorar tu hábito y mantenerte hidratado.",
       en: "Get reminders to stay hydrated. Track your progress and improve your habit.",
@@ -315,7 +406,6 @@ const PROJECTS = [
     glyph: "📰",
     icon: "assets/projects/infocenter/icon.png",
     name: "Infocenter",
-    featured: true,
     tagline: { es: "Noticias locales con votación · Google Play", en: "Local news with voting · Google Play" },
     surfaces: [
       {
@@ -422,67 +512,6 @@ const PROJECTS = [
               en: ["Layered architecture with repository pattern", "JPA/Hibernate persistence on H2", "DTOs and file-based image storage"],
             },
             stack: ["Java 21", "Spring Boot", "Maven", "Spring Web", "Spring Data JPA", "Hibernate", "H2", "REST", "DTOs"],
-            media: { kind: "none" },
-          },
-        ],
-      },
-    ],
-  },
-
-  /* ===================== MORE PERSONAL ===================== */
-
-  // ---------- Credit Manager (App KMP · Backend) ----------
-  {
-    id: "credit-manager",
-    glyph: "💳",
-    name: "Credit Manager",
-    tagline: { es: "Kotlin Multiplatform · Google Play", en: "Kotlin Multiplatform · Google Play" },
-    surfaces: [
-      {
-        label: { es: "App", en: "App" },
-        versions: [
-          {
-            label: "v1.0.0",
-            sub: { es: "2026", en: "2026" },
-            year: "2026",
-            era: "modern",
-            meta: { es: "KMP · Compose MP · Room · Koin · Ktor", en: "KMP · Compose MP · Room · Koin · Ktor" },
-            gradient: "linear-gradient(135deg,#243a63,#46224d)",
-            accent: "#8c7cff",
-            desc: {
-              es: "App de gestión para un negocio de créditos. Con Kotlin Multiplatform adapta sus capacidades a cada plataforma: la versión de escritorio ofrece funciones administrativas más ricas, mientras las apps móviles se enfocan en operaciones de campo como cobrar cuotas.",
-              en: "A management app for a credit business. Using Kotlin Multiplatform it adapts to each platform: the desktop build offers richer administrative features, while the mobile apps focus on field operations like collecting installments.",
-            },
-            highlights: {
-              es: ["Lógica y UI compartidas con KMP + Compose MP", "Escritorio para administración, móvil para campo", "Estadísticas y proyecciones del negocio"],
-              en: ["Shared logic & UI with KMP + Compose MP", "Desktop for admin, mobile for the field", "Business statistics and projections"],
-            },
-            stack: ["Kotlin", "Kotlin Multiplatform", "Compose Multiplatform", "Desktop", "Android", "iOS", "Room", "Koin", "Ktor", "MVVM", "Multi-module", "Claude Code"],
-            link: { label: { es: "Google Play ↗", en: "Google Play ↗" }, href: "#" },
-            media: { kind: "none" },
-          },
-        ],
-      },
-      {
-        label: { es: "Backend", en: "Backend" },
-        versions: [
-          {
-            label: "v1.0.0",
-            sub: { es: "2026", en: "2026" },
-            year: "2026",
-            era: "modern",
-            meta: { es: "Kotlin · Spring Boot · JPA · Redis · Supabase", en: "Kotlin · Spring Boot · JPA · Redis · Supabase" },
-            gradient: "linear-gradient(135deg,#143a3a,#233461)",
-            accent: "#2ad8d2",
-            desc: {
-              es: "Construido manualmente desde cero y luego extendido con ayuda de Claude Code. Expone todos los endpoints de clientes y actúa como primera línea de defensa para la seguridad de los datos.",
-              en: "Built manually from scratch and later extended with help from Claude Code. It exposes all client endpoints and acts as the first line of defense for data security.",
-            },
-            highlights: {
-              es: ["Endpoints de clientes y créditos", "Persistencia con JPA y caché con Redis", "Datos en Supabase; seguridad de primera línea"],
-              en: ["Client and credit endpoints", "JPA persistence with Redis caching", "Supabase data; first-line security"],
-            },
-            stack: ["Kotlin", "Spring Boot 4", "Multi-module", "JPA", "Redis", "Supabase", "Claude Code", "AI Skills"],
             media: { kind: "none" },
           },
         ],
