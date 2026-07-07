@@ -602,6 +602,21 @@ function setMedia(p, v) {
 }
 
 /* full render — used on open and on project change (goTo) */
+/* keep the left dock (icon rail) in sync with the open project's selection:
+   the active item shows the selected app-type's icon, every other item its own
+   project icon. Only affects image icons (glyph projects have no per-type icon). */
+function syncDockIcon() {
+  const p = VISIBLE[openIndex];
+  const ctx = activeContext(p);
+  [...dock.children].forEach((item) => {
+    const i = Number(item.dataset.index);
+    const img = item.querySelector("img.wheel__iconimg");
+    if (!img) return;
+    const icon = i === openIndex ? activeIcon(p, ctx) : VISIBLE[i].icon;
+    if (icon && img.getAttribute("src") !== icon) img.setAttribute("src", icon);
+  });
+}
+
 function paintStage() {
   const p = VISIBLE[openIndex];
   const ctx = activeContext(p);
@@ -609,6 +624,7 @@ function paintStage() {
   stage.innerHTML = stageHTML(p);
   scroller.scrollTop = 0; // always show the new project from its title (not the previous scroll pos)
   wireGallery();
+  syncDockIcon();
   requestAnimationFrame(positionAllThumbs); // size each thumb to its label once laid out
 }
 
@@ -639,6 +655,7 @@ function updateContent(changed) {
     const oldIcon = head.querySelector(".vstage__icon");
     if (oldIcon) oldIcon.outerHTML = headIconMarkup(p, ctx);
   }
+  syncDockIcon(); // mirror the selected app-type icon in the left dock too
 
   // the variant rail now lives in the media column and is rebuilt by setMedia below
 
