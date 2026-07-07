@@ -25,6 +25,24 @@ const esc = (s) => String(s).replace(/"/g, "&quot;");
 function pruneVersions(vers) {
   return FEATURES.showWipVersions ? vers : vers.filter((v) => !v.wip);
 }
+/* prune a surface's versions — handles both plain (versions[]) and
+   app-typed (types[], each with its own versions[]) surfaces. */
+function pruneSurface(s) {
+  if (s.types) {
+    const types = s.types
+      .map((t) => Object.assign({}, t, { versions: pruneVersions(t.versions) }))
+      .filter((t) => t.versions.length);
+    return Object.assign({}, s, { types });
+  }
+  return Object.assign({}, s, { versions: pruneVersions(s.versions) });
+}
+function surfaceHasContent(s) {
+  return s.types ? s.types.length > 0 : s.versions.length > 0;
+}
+/* a surface's own default version list (types → its first type's versions) */
+function surfaceVersions(s) {
+  return s.types ? s.types[0].versions : s.versions;
+}
 function computeVisible() {
   let list = PROJECTS.filter((p) => FEATURES.showJobs || p.group !== "job");
   list = list
@@ -32,9 +50,7 @@ function computeVisible() {
       const c = Object.assign({}, p);
       if (c.versions) c.versions = pruneVersions(c.versions);
       if (c.surfaces) {
-        c.surfaces = c.surfaces
-          .map((s) => Object.assign({}, s, { versions: pruneVersions(s.versions) }))
-          .filter((s) => s.versions.length);
+        c.surfaces = c.surfaces.map(pruneSurface).filter(surfaceHasContent);
       }
       return c;
     })
@@ -52,18 +68,21 @@ const VISIBLE = computeVisible();
 function latestVersion(p) {
   if (p.variants) return p.variants[p.variants.length-1];
   if (p.surfaces){
-    // use always the zero to select the application surface
-    let appIndex = 0;
-    return p.surfaces[appIndex].versions[p.surfaces[appIndex].versions.length-1];
+    // always surface 0 (the App); if it's app-typed, use its first type
+    const vers = surfaceVersions(p.surfaces[0]);
+    return vers[vers.length-1];
   }
   return p.versions[p.versions.length-1];
 }
 function repGradient(p) { return latestVersion(p).gradient; }
 function repStack(p) { return latestVersion(p).stack || []; }
 
+function surfaceMaxVersions(s) {
+  return s.types ? Math.max.apply(null, s.types.map((t) => t.versions.length)) : s.versions.length;
+}
 function badgeFor(p) {
   if (p.variants) return `${p.variants.length} apps`;
-  const maxV = p.surfaces ? Math.max.apply(null, p.surfaces.map((s) => s.versions.length)) : p.versions.length;
+  const maxV = p.surfaces ? Math.max.apply(null, p.surfaces.map(surfaceMaxVersions)) : p.versions.length;
   return maxV > 1 ? `${maxV} ${tChrome("projects.versions")}` : "";
 }
 function iconMarkup(p, baseClass) {
@@ -158,7 +177,7 @@ if (wipBadge) wipBadge.hidden = !FEATURES.showWipBadge;
 let openIndex = 0;
 let isOpen = false;
 let opening = false; // true only during the open FLIP, until the content reveal fires
-let sel = { s: 0, v: 0, k: 0 }; // surface / version / variant indices
+let sel = { s: 0, t: 0, v: 0, k: 0 }; // surface / app-type / version / variant indices
 
 const DOCK_SPACING = 70;
 const DOCK_VISIBLE = 3;
@@ -229,7 +248,16 @@ function activeContext(p) {
   }
   if (p.surfaces) {
     const s = clamp(sel.s, 0, p.surfaces.length - 1);
-    const versions = p.surfaces[s].versions;
+    const surface = p.surfaces[s];
+    // app-typed surface (Staff / Collector / Client) → extra selection level
+    if (surface.types) {
+      const t = clamp(sel.t, 0, surface.types.length - 1);
+      const type = surface.types[t];
+      const versions = type.versions;
+      const v = clamp(sel.v, 0, versions.length - 1);
+      return { version: versions[v], surfaceIdx: s, typeIdx: t, types: surface.types, versionIdx: v, versions };
+    }
+    const versions = surface.versions;
     const v = clamp(sel.v, 0, versions.length - 1);
     return { version: versions[v], surfaceIdx: s, versionIdx: v, versions };
   }
@@ -379,11 +407,21 @@ function versionSlotHTML(ctx) {
   return "";
 }
 
+/* app-type switch (Staff / Collector / Client) — only when the active surface
+   defines 2+ types. Sits between the surface toggle and the version switch. */
+function typeSlotHTML(ctx) {
+  if (ctx.types && ctx.types.length > 1) {
+    return `<div class="vswitch-group"><span class="vswitch-cap">${tChrome("projects.appType")}</span>${segHTML(ctx.types.map((t) => ({ label: t.label, sub: t.sub })), ctx.typeIdx, "type")}</div>`;
+  }
+  return "";
+}
+
 function switchesHTML(p, ctx) {
   let h = "";
   if (p.surfaces && p.surfaces.length > 1) {
     h += `<div class="vswitch-group"><span class="vswitch-cap">${tChrome("projects.surface")}</span>${segHTML(p.surfaces.map((s) => ({ label: s.label, sub: s.sub })), ctx.surfaceIdx, "surface")}</div>`;
   }
+  h += `<div class="tslot">${typeSlotHTML(ctx)}</div>`;
   h += `<div class="vslot">${versionSlotHTML(ctx)}</div>`;
   // Variant rail (internal apps) is rendered above the screenshots in the media
   // column instead of here — see mediaHTML — so switching between a project's
@@ -551,10 +589,21 @@ function updateContent(changed) {
 
   // the variant rail now lives in the media column and is rebuilt by setMedia below
 
+  const tslot = stage.querySelector(".tslot");
   const slot = stage.querySelector(".vslot");
+
+  // surface change → the whole app-type switch may appear/disappear (typed vs plain)
+  if (changed === "surface" && tslot) {
+    tslot.innerHTML = typeSlotHTML(ctx);
+    if (tslot.firstChild) revealIn(tslot);
+  } else if (changed === "type" && tslot) {
+    setSwitchActive(tslot.querySelector('.vswitch[data-kind="type"]'), ctx.typeIdx);
+  }
+
   if (slot) {
-    if (changed === "surface") {
-      slot.innerHTML = versionSlotHTML(ctx); // new surface → its own version switch
+    // both a surface swap and a type swap bring a new version list → rebuild it
+    if (changed === "surface" || changed === "type") {
+      slot.innerHTML = versionSlotHTML(ctx);
       if (slot.firstChild) revealIn(slot);
     } else {
       setSwitchActive(slot.querySelector('.vswitch[data-kind="version"]'), ctx.versionIdx);
@@ -571,7 +620,17 @@ function updateContent(changed) {
 /* one-time delegated handler — survives innerHTML swaps (stage element persists) */
 stage.addEventListener("click", (e) => {
   const sBtn = e.target.closest('.vswitch[data-kind="surface"] .vswitch__btn');
-  if (sBtn) { sel.s = Number(sBtn.dataset.i); updateContent("surface"); return; }
+  if (sBtn) { sel.s = Number(sBtn.dataset.i); sel.t = 0; updateContent("surface"); return; }
+  const tBtn = e.target.closest('.vswitch[data-kind="type"] .vswitch__btn');
+  if (tBtn) {
+    sel.t = Number(tBtn.dataset.i);
+    // land on the newest version of the chosen app-type
+    const types = activeContext(VISIBLE[openIndex]).types || [];
+    const vers = (types[sel.t] && types[sel.t].versions) || [];
+    sel.v = Math.max(0, vers.length - 1);
+    updateContent("type");
+    return;
+  }
   const vBtn = e.target.closest('.vswitch[data-kind="version"] .vswitch__btn');
   if (vBtn) { sel.v = Number(vBtn.dataset.i); updateContent("version"); return; }
   const chip = e.target.closest(".vrail__chip");
@@ -656,11 +715,11 @@ function revealViewerContent() {
 
 function resetSel() {
   const p = VISIBLE[openIndex];
-  // default: newest version (last) of surface 0 / versions; first variant
+  // default: newest version (last) of surface 0 (first type, if typed); first variant
   let lastV = 0;
-  if (p.surfaces) lastV = p.surfaces[0].versions.length - 1;
+  if (p.surfaces) lastV = surfaceVersions(p.surfaces[0]).length - 1;
   else if (p.versions) lastV = p.versions.length - 1;
-  sel = { s: 0, v: lastV, k: 0 };
+  sel = { s: 0, t: 0, v: lastV, k: 0 };
 }
 
 function closeViewer() {

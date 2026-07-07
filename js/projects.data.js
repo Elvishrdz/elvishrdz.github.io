@@ -13,7 +13,13 @@
        group?: "job"              gated by FEATURES.showJobs
        EXACTLY ONE of:
          versions[]                simple project (1+ versions)
-         surfaces[]                App/Backend, each owns versions[]
+         surfaces[]                App/Backend toggle. Each surface owns EITHER
+                                   versions[] (plain) OR types[] (app-type level:
+                                   e.g. Staff / Collector / Client). Each type is
+                                   { label{es,en}, sub{es,en} (year of its latest
+                                   version), versions[] }. types[] renders an extra
+                                   segmented control between the surface toggle and
+                                   the version switch; shown only when 2+ types exist.
          variants[]                job sub-projects (version-shaped)
      version/variant shape:
        label, sub {es,en}, year, era ("legacy"|"modern"|"auto")
@@ -75,54 +81,138 @@ const PROJECTS = [
     surfaces: [
       {
         label: { es: "App", en: "App" },
-        versions: [
+        // App surface splits into app-TYPES (Staff / Collector / Client). Each type
+        // owns its own versions[] with its own copy, screenshots, color, etc.
+        // `sub` on each type = year of its latest version (shown under the chip).
+        // NOTE: placeholder/test content — refine copy, versions and shots later.
+        types: [
           {
-            label: "v1.0.0",
+            label: { es: "Staff", en: "Staff" },
             sub: { es: "2026", en: "2026" },
-            year: "2026",
-            era: "modern",
-            meta: { es: "KMP · Compose MP · Room · Koin · Ktor", en: "KMP · Compose MP · Room · Koin · Ktor" },
-            gradient: "#ffffff",
-            accent: "#b1b1b1",
-            desc: {
-              es: "App de gestión para un negocio de créditos. Con Kotlin Multiplatform adapta sus capacidades a cada plataforma: la versión de escritorio ofrece funciones administrativas más ricas, mientras las apps móviles se enfocan en operaciones de campo como cobrar cuotas.",
-              en: "A management app for a credit business. Using Kotlin Multiplatform it adapts to each platform: the desktop build offers richer administrative features, while the mobile apps focus on field operations like collecting installments.",
-            },
-            highlights: {
-              es: ["Lógica y UI compartidas con KMP + Compose MP", "Escritorio para administración, móvil para campo", "Estadísticas y proyecciones del negocio"],
-              en: ["Shared logic & UI with KMP + Compose MP", "Desktop for admin, mobile for the field", "Business statistics and projections"],
-            },
-            stack: ["Compose Multiplatform (CMP)", "Mapbox", "Supabase", "Xcode", "Android Studio", "IntelliJ", "Redis", "Room", "Koin", "Ktor", "MacOS", "Android", "iOS", "Claude Code", "Kotlin", "Kotlin Multiplatform (KMP)"],
-            media: {
-              kind: "gallery",
-              devices: [
-                { kind: "phone", src: "assets/projects/cm-manager/v1/01-cm-ios-app-staff-dashboard.png", caption: { es: "Menu de personal", en: "Staff dashboard" }, group: { es: "iOS", en: "iOS" } },
-                { kind: "phone", src: "assets/projects/cm-manager/v1/02-cm-ios-app-map-location-picker.png", caption: { es: "Mapa", en: "Map" }, group: { es: "iOS", en: "iOS" } },
-                { kind: "phone", src: "assets/projects/cm-manager/v1/03-cm-ios-app-credits.png", caption: { es: "Creditos", en: "Credits" }, group: { es: "iOS", en: "iOS" } },
-                { kind: "phone", src: "assets/projects/cm-manager/v1/04-cm-ios-app-daily-collection.png", caption: { es: "Cobro diario", en: "Daily Collection" }, group: { es: "iOS", en: "iOS" } },
-                { kind: "phone", src: "assets/projects/cm-manager/v1/05-cm-ios-app-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector System" }, group: { es: "iOS", en: "iOS" } },
-
-                // { kind: "phone", src: "assets/projects/cm-manager/v1/01-cm-ios-app-staff-dashboard.png", caption: { es: "Menu de personal", en: "Staff dashboard" }, group: { es: "Android", en: "Android" } },
-                // { kind: "phone", src: "assets/projects/cm-manager/v1/02-cm-ios-app-map-location-picker.png", caption: { es: "Mapa", en: "Map" }, group: { es: "Android", en: "Android" } },
-                // { kind: "phone", src: "assets/projects/cm-manager/v1/03-cm-ios-app-credits.png", caption: { es: "Creditos", en: "Credits" }, group: { es: "Android", en: "Android" } },
-                // { kind: "phone", src: "assets/projects/cm-manager/v1/04-cm-ios-app-daily-collection.png", caption: { es: "Cobro diario", en: "Daily Collection" }, group: { es: "Android", en: "Android" } },
-                // { kind: "phone", src: "assets/projects/cm-manager/v1/05-cm-ios-app-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector System" }, group: { es: "Android", en: "Android" } },
-
-                { kind: "laptop", src: "assets/projects/cm-manager/v1/01-cm-desktop-app-macos-installer.png", caption: { es: "Instaladores", en: "Installers" }, group: { es: "MacOS", en: "MacOS" } },
-                { kind: "laptop", src: "assets/projects/cm-manager/v1/02-cm-desktop-app-macos-apps-installed.png", caption: { es: "Apps instaladas", en: "Installed apps" }, group: { es: "MacOS", en: "MacOS" } },
-                { kind: "laptop", src: "assets/projects/cm-manager/v1/03-cm-desktop-app-macos-credit-requests.png", caption: { es: "Solicitud de creditos", en: "Credit requests" }, group: { es: "MacOS", en: "MacOS" } },
-                { kind: "laptop", src: "assets/projects/cm-manager/v1/04-cm-desktop-app-macos-customer-details.png", caption: { es: "Detalles del cliente", en: "Client details" }, group: { es: "MacOS", en: "MacOS" } },
-                { kind: "laptop", src: "assets/projects/cm-manager/v1/05-cm-desktop-app-macos-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector system" }, group: { es: "MacOS", en: "MacOS" } },
-                { kind: "laptop", src: "assets/projects/cm-manager/v1/06-cm-desktop-app-macos-collector-dashboard.png", caption: { es: "Menu de cobradores", en: "collector dashboard" }, group: { es: "MacOS", en: "MacOS" } },
-
-                // { kind: "laptop", src: "assets/projects/cm-manager/v1/01-cm-desktop-app-macos-installer.png", caption: { es: "Instaladores", en: "Installers" }, group: { es: "Windows", en: "Windows" } },
-                // { kind: "laptop", src: "assets/projects/cm-manager/v1/02-cm-desktop-app-macos-apps-installed.png", caption: { es: "Apps instaladas", en: "Installed apps" }, group: { es: "Windows", en: "Windows" } },
-                // { kind: "laptop", src: "assets/projects/cm-manager/v1/03-cm-desktop-app-macos-credit-requests.png", caption: { es: "Solicitud de creditos", en: "Credit requests" }, group: { es: "Windows", en: "Windows" } },
-                // { kind: "laptop", src: "assets/projects/cm-manager/v1/04-cm-desktop-app-macos-customer-details.png", caption: { es: "Detalles del cliente", en: "Client details" }, group: { es: "Windows", en: "Windows" } },
-                // { kind: "laptop", src: "assets/projects/cm-manager/v1/05-cm-desktop-app-macos-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector system" }, group: { es: "Windows", en: "Windows" } },
-                // { kind: "laptop", src: "assets/projects/cm-manager/v1/06-cm-desktop-app-macos-collector-dashboard.png", caption: { es: "Menu principal de cobradores", en: "collector dashboard" }, group: { es: "Windows", en: "Windows" } },
-              ],
-            },
+            versions: [
+              {
+                label: "v1.0.0",
+                sub: { es: "2026", en: "2026" },
+                year: "2026",
+                era: "modern",
+                meta: { es: "KMP · Compose MP · Room · Koin · Ktor", en: "KMP · Compose MP · Room · Koin · Ktor" },
+                gradient: "#ffffff",
+                accent: "#b1b1b1",
+                desc: {
+                  es: "App de administración para el personal del negocio de créditos. La versión de escritorio ofrece las funciones administrativas más ricas: gestión de solicitudes, detalles de clientes y control del sistema de cobradores.",
+                  en: "Administrative app for the credit business staff. The desktop build offers the richest admin features: request management, client details and control over the collector system.",
+                },
+                highlights: {
+                  es: ["Gestión de solicitudes de crédito", "Detalles y expediente de clientes", "Estadísticas y proyecciones del negocio"],
+                  en: ["Credit request management", "Client details and records", "Business statistics and projections"],
+                },
+                stack: ["Compose Multiplatform (CMP)", "Mapbox", "Supabase", "Xcode", "Android Studio", "IntelliJ", "Redis", "Room", "Koin", "Ktor", "MacOS", "Android", "iOS", "Claude Code", "Kotlin", "Kotlin Multiplatform (KMP)"],
+                media: {
+                  kind: "gallery",
+                  devices: [
+                    { kind: "laptop", src: "assets/projects/cm-manager/v1/01-cm-desktop-app-macos-installer.png", caption: { es: "Instaladores", en: "Installers" }, group: { es: "MacOS", en: "MacOS" } },
+                    { kind: "laptop", src: "assets/projects/cm-manager/v1/02-cm-desktop-app-macos-apps-installed.png", caption: { es: "Apps instaladas", en: "Installed apps" }, group: { es: "MacOS", en: "MacOS" } },
+                    { kind: "laptop", src: "assets/projects/cm-manager/v1/03-cm-desktop-app-macos-credit-requests.png", caption: { es: "Solicitud de creditos", en: "Credit requests" }, group: { es: "MacOS", en: "MacOS" } },
+                    { kind: "laptop", src: "assets/projects/cm-manager/v1/04-cm-desktop-app-macos-customer-details.png", caption: { es: "Detalles del cliente", en: "Client details" }, group: { es: "MacOS", en: "MacOS" } },
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/01-cm-ios-app-staff-dashboard.png", caption: { es: "Menu de personal", en: "Staff dashboard" }, group: { es: "iOS", en: "iOS" } },
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/02-cm-ios-app-map-location-picker.png", caption: { es: "Mapa", en: "Map" }, group: { es: "iOS", en: "iOS" } },
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/03-cm-ios-app-credits.png", caption: { es: "Creditos", en: "Credits" }, group: { es: "iOS", en: "iOS" } },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            label: { es: "Cobrador", en: "Collector" },
+            sub: { es: "2026", en: "2026" },
+            versions: [
+              // Ordered oldest → newest (last = newest, shown by default).
+              {
+                label: "v1.0.0",
+                sub: { es: "2026", en: "2026" },
+                year: "2026",
+                era: "modern",
+                meta: { es: "KMP · Compose MP · Room", en: "KMP · Compose MP · Room" },
+                gradient: "linear-gradient(135deg,#14342a,#0ca678)",
+                accent: "#0ca678",
+                desc: {
+                  es: "Primera versión de la app de cobradores. (Contenido de prueba — reemplazar más adelante.)",
+                  en: "First release of the collector app. (Placeholder content — replace later.)",
+                },
+                highlights: {
+                  es: ["Cobro diario", "Registro de cuotas"],
+                  en: ["Daily collection", "Installment logging"],
+                },
+                stack: ["Compose Multiplatform (CMP)", "Room", "Koin", "Ktor", "Android", "iOS", "Kotlin"],
+                media: {
+                  kind: "gallery",
+                  devices: [
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/04-cm-ios-app-daily-collection.png", caption: { es: "Cobro diario", en: "Daily collection" }, group: { es: "iOS", en: "iOS" } },
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/05-cm-ios-app-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector system" }, group: { es: "iOS", en: "iOS" } },
+                  ],
+                },
+              },
+              {
+                // Newest version → shown by default when this app-type is opened.
+                label: "v1.0.1",
+                sub: { es: "2026", en: "2026" },
+                year: "2026",
+                era: "modern",
+                meta: { es: "KMP · Compose MP · Mapbox · Room", en: "KMP · Compose MP · Mapbox · Room" },
+                gradient: "linear-gradient(135deg,#0f3d2e,#12b886)",
+                accent: "#12b886",
+                desc: {
+                  es: "App móvil para los cobradores de campo. Se enfoca en las operaciones diarias: rutas de cobro, registro de cuotas y ubicación de clientes en el mapa. (Contenido de prueba.)",
+                  en: "Mobile app for field collectors. Focused on day-to-day operations: collection routes, logging installments and locating clients on the map. (Placeholder content.)",
+                },
+                highlights: {
+                  es: ["Cobro diario y registro de cuotas", "Ubicación de clientes en el mapa", "Sistema de rutas de cobradores"],
+                  en: ["Daily collection and installment logging", "Client location on the map", "Collector route system"],
+                },
+                stack: ["Compose Multiplatform (CMP)", "Mapbox", "Room", "Koin", "Ktor", "Android", "iOS", "Kotlin", "Kotlin Multiplatform (KMP)"],
+                media: {
+                  kind: "gallery",
+                  devices: [
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/04-cm-ios-app-daily-collection.png", caption: { es: "Cobro diario", en: "Daily collection" }, group: { es: "iOS", en: "iOS" } },
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/05-cm-ios-app-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector system" }, group: { es: "iOS", en: "iOS" } },
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/02-cm-ios-app-map-location-picker.png", caption: { es: "Mapa", en: "Map" }, group: { es: "iOS", en: "iOS" } },
+                    { kind: "laptop", src: "assets/projects/cm-manager/v1/05-cm-desktop-app-macos-collector-system.png", caption: { es: "Sistema de cobradores", en: "Collector system" }, group: { es: "MacOS", en: "MacOS" } },
+                    { kind: "laptop", src: "assets/projects/cm-manager/v1/06-cm-desktop-app-macos-collector-dashboard.png", caption: { es: "Menu de cobradores", en: "Collector dashboard" }, group: { es: "MacOS", en: "MacOS" } },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            label: { es: "Cliente", en: "Client" },
+            sub: { es: "2026", en: "2026" },
+            versions: [
+              {
+                label: "v1.0.0",
+                sub: { es: "2026", en: "2026" },
+                year: "2026",
+                era: "modern",
+                meta: { es: "KMP · Compose MP · Ktor", en: "KMP · Compose MP · Ktor" },
+                gradient: "linear-gradient(135deg,#1a2a4a,#4c6ef5)",
+                accent: "#4c6ef5",
+                desc: {
+                  es: "App para el cliente/prestatario: consulta de su crédito, cuotas pendientes y calendario de pagos. (Contenido de prueba — reemplazar más adelante.)",
+                  en: "App for the client/borrower: view their credit, pending installments and payment schedule. (Placeholder content — replace later.)",
+                },
+                highlights: {
+                  es: ["Estado del crédito y saldo", "Cuotas pendientes y calendario de pagos", "Historial de pagos"],
+                  en: ["Credit status and balance", "Pending installments and payment schedule", "Payment history"],
+                },
+                stack: ["Compose Multiplatform (CMP)", "Ktor", "Koin", "Android", "iOS", "Kotlin", "Kotlin Multiplatform (KMP)"],
+                media: {
+                  kind: "gallery",
+                  devices: [
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/03-cm-ios-app-credits.png", caption: { es: "Mis creditos", en: "My credits" }, group: { es: "iOS", en: "iOS" } },
+                    { kind: "phone", src: "assets/projects/cm-manager/v1/04-cm-ios-app-daily-collection.png", caption: { es: "Pagos", en: "Payments" }, group: { es: "iOS", en: "iOS" } },
+                  ],
+                },
+              },
+            ],
           },
         ],
       },

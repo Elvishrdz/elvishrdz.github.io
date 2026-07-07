@@ -1802,7 +1802,7 @@ body {
 }
 
 .vstage__switches { margin-bottom: 0; }
-.vslot:empty { display: none; }
+.vslot:empty, .tslot:empty { display: none; }
 
 .vstage__index {
   font-family: var(--font-mono);
