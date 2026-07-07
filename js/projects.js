@@ -82,6 +82,9 @@ function surfaceMaxVersions(s) {
 }
 function badgeFor(p) {
   if (p.variants) return `${p.variants.length} apps`;
+  // multi-app projects (2+ app-types) advertise the app count instead of versions
+  const apps = appTypes(p).length;
+  if (apps > 1) return `${apps} apps`;
   const maxV = p.surfaces ? Math.max.apply(null, p.surfaces.map(surfaceMaxVersions)) : p.versions.length;
   return maxV > 1 ? `${maxV} ${tChrome("projects.versions")}` : "";
 }
@@ -89,6 +92,49 @@ function iconMarkup(p, baseClass) {
   return p.icon
     ? `<img class="${baseClass}" src="${p.icon}" alt="" loading="lazy">`
     : `<span class="${baseClass} ${baseClass}--glyph">${p.glyph}</span>`;
+}
+
+/* the distinct "apps" inside a project = every app-type across its surfaces.
+   Multiple app-types → the project bundles several apps (Staff / Collector / …). */
+function appTypes(p) {
+  if (!p.surfaces) return [];
+  const out = [];
+  p.surfaces.forEach((s) => { if (s.types) s.types.forEach((t) => out.push(t)); });
+  return out;
+}
+function typeIcon(p, t) { return (t && t.icon) || p.icon; }
+
+/* grid icon: single app → the usual one icon; 2+ apps → their icons fanned out
+   like poker cards held in a hand (each `.project__fancard` rotated by CSS). */
+function gridIconMarkup(p) {
+  const types = appTypes(p);
+  if (types.length > 1) {
+    const cards = types
+      .map((t, i) => {
+        const src = typeIcon(p, t);
+        const inner = src
+          ? `<img src="${src}" alt="" loading="lazy">`
+          : `<span class="project__fancard-glyph">${p.glyph}</span>`;
+        return `<span class="project__fancard" style="--i:${i}">${inner}</span>`;
+      })
+      .join("");
+    return `<div class="project__fan" style="--n:${types.length}">${cards}</div>`;
+  }
+  return iconMarkup(p, "project__icon");
+}
+
+/* icon shown in the detail-view header — follows the selected app-type. */
+function activeIcon(p, ctx) {
+  if (ctx && ctx.types && ctx.types[ctx.typeIdx] && ctx.types[ctx.typeIdx].icon) {
+    return ctx.types[ctx.typeIdx].icon;
+  }
+  return p.icon;
+}
+function headIconMarkup(p, ctx) {
+  const icon = activeIcon(p, ctx);
+  return icon
+    ? `<img class="vstage__icon" src="${icon}" alt="" loading="lazy">`
+    : `<span class="vstage__icon vstage__icon--glyph">${p.glyph}</span>`;
 }
 
 /* ---------- GRID ---------- */
@@ -118,7 +164,7 @@ function renderGrid() {
     card.innerHTML = `
       <div class="project__media" style="background:${repGradient(p)}">
         ${badge ? `<span class="project__versions">${badge}</span>` : ""}
-        ${iconMarkup(p, "project__icon")}
+        ${gridIconMarkup(p)}
         <span class="project__open">${tChrome("projects.viewLabel")}</span>
       </div>
       <div class="project__body">
@@ -471,7 +517,7 @@ function stageHTML(p) {
   return `
     <div class="vstage__text">
       <div class="vstage__index">${String(openIndex + 1).padStart(2, "0")}<span> / ${String(total).padStart(2, "0")}</span></div>
-      <div class="vstage__head">${iconMarkup(p, "vstage__icon")}<h2 class="vstage__title">${pLang(p.name)}</h2></div>
+      <div class="vstage__head">${headIconMarkup(p, ctx)}<h2 class="vstage__title">${pLang(p.name)}</h2></div>
       <p class="vstage__tagline">${pLang(p.tagline)}</p>
       <div class="vstage__switches">${switchesHTML(p, ctx)}</div>
       <div class="vstage__body">${bodyHTML(v)}</div>
@@ -586,6 +632,13 @@ function updateContent(changed) {
   applyTheme(ctx.version);
 
   setSwitchActive(stage.querySelector('.vswitch[data-kind="surface"]'), ctx.surfaceIdx);
+
+  // header icon follows the selected app-type (rebuilt to keep img/glyph in sync)
+  const head = stage.querySelector(".vstage__head");
+  if (head) {
+    const oldIcon = head.querySelector(".vstage__icon");
+    if (oldIcon) oldIcon.outerHTML = headIconMarkup(p, ctx);
+  }
 
   // the variant rail now lives in the media column and is rebuilt by setMedia below
 

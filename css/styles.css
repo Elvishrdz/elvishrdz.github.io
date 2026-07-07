@@ -2173,6 +2173,34 @@ body {
 .project:hover .project__icon { transform: scale(1.1) rotate(-4deg); }
 .project:hover .project__icon--glyph { transform: scale(1.18) rotate(-6deg); }
 
+/* ===== Multi-app icon fan (poker cards held in a hand) =====
+   Only used when a project bundles 2+ app-types. Each card pivots from a point
+   below the stack so the icons splay out into an arc; hover fans them wider. */
+.project__fan {
+  position: relative;
+  width: 64px; height: 64px;
+  --spread: 15deg;
+  transition: transform var(--dur-med, 0.35s) cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project:hover .project__fan { --spread: 26deg; transform: translateY(-4px); }
+.project__fancard {
+  position: absolute; inset: 0;
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+  transform-origin: 50% 155%;
+  transform: rotate(calc((var(--i) - (var(--n) - 1) / 2) * var(--spread)));
+  transition: transform var(--dur-med, 0.35s) cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: calc(var(--i) + 1);
+  background: rgba(20, 20, 26, 0.9);
+}
+.project__fancard img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 16px; display: block;
+}
+.project__fancard-glyph {
+  display: grid; place-items: center; width: 100%; height: 100%; font-size: 2rem;
+}
+
 /* ===== "View all projects" button ===== */
 .projects__viewall {
   display: block;

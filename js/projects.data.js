@@ -17,9 +17,13 @@
                                    versions[] (plain) OR types[] (app-type level:
                                    e.g. Staff / Collector / Client). Each type is
                                    { label{es,en}, sub{es,en} (year of its latest
-                                   version), versions[] }. types[] renders an extra
-                                   segmented control between the surface toggle and
-                                   the version switch; shown only when 2+ types exist.
+                                   version), icon? (per-app icon), versions[] }.
+                                   types[] renders an extra segmented control between
+                                   the surface toggle and the version switch; shown
+                                   only when 2+ types exist. When a project has 2+
+                                   app-types their icons fan out (poker-hand style) on
+                                   the grid card, and the detail header icon swaps to
+                                   the selected type's icon.
          variants[]                job sub-projects (version-shaped)
      version/variant shape:
        label, sub {es,en}, year, era ("legacy"|"modern"|"auto")
@@ -89,6 +93,7 @@ const PROJECTS = [
           {
             label: { es: "Staff", en: "Staff" },
             sub: { es: "2026", en: "2026" },
+            icon: "assets/projects/cm-manager/v1/cm-staff-app-icon.png",
             versions: [
               {
                 label: "v1.0.0",
@@ -125,6 +130,7 @@ const PROJECTS = [
           {
             label: { es: "Cobrador", en: "Collector" },
             sub: { es: "2026", en: "2026" },
+            icon: "assets/projects/cm-manager/v1/cm-collector-app-icon.png",
             versions: [
               // Ordered oldest → newest (last = newest, shown by default).
               {
@@ -186,6 +192,7 @@ const PROJECTS = [
           {
             label: { es: "Cliente", en: "Client" },
             sub: { es: "2026", en: "2026" },
+            icon: "assets/projects/cm-manager/v1/cm-borrower-app-icon.png",
             versions: [
               {
                 label: "v1.0.0",
